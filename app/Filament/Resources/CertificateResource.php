@@ -24,10 +24,17 @@ class CertificateResource extends Resource
         return $form
             ->schema([
                 Tables\Columns\TextInputColumn::make('name'),
-                Forms\Components\MarkdownEditor::make('description'),
                 Forms\Components\Toggle::make('is_active')->default(true),
-                Forms\Components\FileUpload::make('certificate_image'),
-            ]);
+                Forms\Components\MarkdownEditor::make('description')->columnSpan(2),
+
+                Forms\Components\FileUpload::make('certificate_image')
+
+                    ->columns(1)
+                    ->multiple()
+                    ->directory('certificate-images')
+                    
+            ])->columns(2);
+            
     }
 
     public static function table(Table $table): Table
